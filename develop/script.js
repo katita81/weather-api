@@ -2,16 +2,21 @@
 
 var cityE = document.getElementById("inputSearch").value;
 
+var date = new dayjs().format("DD/MM/YYYY");
+
+const cities =[];
+
 
 
 function deleteInput(){
     document.getElementById("inputSearch").value= "";
 }
+// function citiesSelected(){
+// var cityBtn = document.getElementsByClassName("btn")
 
+//     cityWeather();
 
-var date = new dayjs().format("DD/MM/YYYY");
-
-    const cities =[];
+// }
 
 
 
@@ -26,27 +31,26 @@ function cityWeather(){
             response.json().then(function (data) {
 
 
-            var cityE = document.getElementById("inputSearch").value;
-
-            
-
-            if (cityE === ''|| cityE === "If any, look at the cities below first" || !response.ok || cities.includes(cityE)) {
-                return }
+           // var cityE = document.getElementById("inputSearch").value;
 
             cityE = cityE.charAt(0).toUpperCase() + cityE.slice(1);
+
+            if (cityE === '' || !response.ok || cities.includes(cityE) ) {
+                return }
+
+            
             var b = document.createElement("button");
             document.getElementById("history").appendChild(b);
             b.setAttribute("id", "cityH " + cityE);
+           // b.setAttribute("class","btn");
+            
             b.innerText = cityE;
-
+            //convert cityE to first capital letter again
             cities.push(cityE);
-            console.log(cities)
+            console.log(cities);
 
-            
-
-            
-            
-
+            //document.getElementById("cityH"+cityE).addEventListener("click",cityWeather());
+    
             for(var j=0, i=0; j<= 39, i<=5; j=j+7, i++){
 
                 var weatherIconEl = $("#wicon"+i)[0];
