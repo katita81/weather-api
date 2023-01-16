@@ -1,27 +1,19 @@
 
-
-var cityE = document.getElementById("inputSearch").value;
-
 var date = new dayjs().format("DD/MM/YYYY");
 
 const cities =[];
+var city;
 
-
-
-function deleteInput(){
-    document.getElementById("inputSearch").value= "";
+function clickCityButton(city) {
+    cityWeather(city);
 }
-// function citiesSelected(){
-// var cityBtn = document.getElementsByClassName("btn")
 
-//     cityWeather();
-
-// }
-
-
-
-function cityWeather(){
-    var cityE = document.getElementById("inputSearch").value;
+function cityWeather(clickedCity=null){
+    if (clickedCity === null) {
+        var cityE = document.getElementById("inputSearch").value;
+    } else {
+        var cityE = clickedCity;
+    }
 
     const weatherAPIIconBaseUrl = "https://openweathermap.org/img/wn/";
     
@@ -29,27 +21,7 @@ function cityWeather(){
     fetch('http://api.openweathermap.org/data/2.5/forecast/?q='+ cityE +'&units=metric&limit=1&appid=4e1ecc4c7571d54e3ab83751a04818fd')
         .then(function(response) {
             response.json().then(function (data) {
-
-
-           // var cityE = document.getElementById("inputSearch").value;
-
             cityE = cityE.charAt(0).toUpperCase() + cityE.slice(1);
-
-            if (cityE === '' || !response.ok || cities.includes(cityE) ) {
-                return }
-
-            
-            var b = document.createElement("button");
-            document.getElementById("history").appendChild(b);
-            b.setAttribute("id", "cityH " + cityE);
-           // b.setAttribute("class","btn");
-            
-            b.innerText = cityE;
-            //convert cityE to first capital letter again
-            cities.push(cityE);
-            console.log(cities);
-
-            //document.getElementById("cityH"+cityE).addEventListener("click",cityWeather());
     
             for(var j=0, i=0; j<= 39, i<=5; j=j+7, i++){
 
@@ -122,8 +94,28 @@ function cityWeather(){
                 daysTemp = (JSON.stringify(daysWind))*3.6;
                 document.getElementById("day"+ i + "_wind").textContent = "Wind: "+daysWind +" Km/h";
             }
+
+            if (cityE === '' || !response.ok || cities.includes(cityE) ) {
+                return }
+
+            
+            var b = document.createElement("button");
+            document.getElementById("history").appendChild(b);
+            b.setAttribute("id", "cityH " + cityE);
+            b.setAttribute("class","chosenCities");
+            b.addEventListener('click', function () {
+                clickCityButton(cityE);
+            });
+            
+            b.innerText = cityE;
+            //convert cityE to first capital letter again
+            cities.push(cityE);
+            console.log(cities);
             
             }
             )
         })
     }      
+
+cityWeather();
+document.getElementById("inputSearch").value = "";
