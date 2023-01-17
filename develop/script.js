@@ -1,11 +1,12 @@
 
 var date = new dayjs().format("DD/MM/YYYY");
-
-const cities =[];
-var city;
+var cities = [];
 
 function clickCityButton(city) {
-    cityWeather(city);
+    function handler() {
+        cityWeather(city);
+    }
+    return handler;
 }
 
 function cityWeather(clickedCity=null){
@@ -62,7 +63,6 @@ function cityWeather(clickedCity=null){
             document.getElementById("wind").textContent ="Wind: "+ roundWind +" Km/h";
 
 
-            //document.getElementById("image").textContent = wIcon;
             
             for(var j=0, i=1; j<= 39, i<=5; j=j+7, i++){
 
@@ -103,19 +103,37 @@ function cityWeather(clickedCity=null){
             document.getElementById("history").appendChild(b);
             b.setAttribute("id", "cityH " + cityE);
             b.setAttribute("class","chosenCities");
-            b.addEventListener('click', function () {
-                clickCityButton(cityE);
-            });
+            b.addEventListener('click', clickCityButton(cityE));
             
             b.innerText = cityE;
-            //convert cityE to first capital letter again
             cities.push(cityE);
+            localStorage.setItem('cities', JSON.stringify(cities));
             console.log(cities);
-            
             }
             )
         })
     }      
 
+function loadCities() {
+    cities = localStorage.getItem('cities');
+    if (cities === null) {
+        cities = [];
+    } else {
+        cities = JSON.parse(cities);
+    }
+
+    for (var i = 0; i < cities.length; i++) {
+        var city = cities[i];
+        var b = document.createElement("button");
+        document.getElementById("history").appendChild(b);
+        b.setAttribute("id", "cityH " + city);
+        b.setAttribute("class","chosenCities");
+        b.addEventListener('click', clickCityButton(city));
+        
+        b.innerText = city;
+    }
+}
+
+loadCities();
 cityWeather();
 document.getElementById("inputSearch").value = "";
