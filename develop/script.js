@@ -20,7 +20,7 @@ function cityWeather(clickedCity=null){
     const weatherAPIIconBaseUrl = "https://openweathermap.org/img/wn/";//icon weather api
     
     // make a call to our current and 5day forecast using the city name
-    fetch('http://api.openweathermap.org/data/2.5/forecast/?q='+ cityE +'&units=metric&limit=1&appid=4e1ecc4c7571d54e3ab83751a04818fd')
+    fetch('https://api.openweathermap.org/data/2.5/forecast/?q='+ cityE +'&units=metric&limit=1&appid=4e1ecc4c7571d54e3ab83751a04818fd')
         .then(function(response) {
             response.json().then(function (data) {
             //to convert first character to capital letter
