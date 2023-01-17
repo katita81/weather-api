@@ -10,6 +10,6 @@ This Weather Dashboard is Weather API application that shows the current date an
 ![Loading the page with the city buttons created before](assets/img/cityButtonsRemainAfterRefresingPage.png)
 ![Clicking on city button to display it weather](assets/img/ClickingOnCityButton.png)
 
-Repository link: <https://github.com/katita81/weather-api>
+Repository link: <http://github.com/katita81/weather-api>
 
-Live link: <https://katita81.github.io/weather-api>
+Live link: <http://katita81.github.io/weather-api>
