@@ -1,0 +1,3 @@
+# Weather API application
+
+This application shows the current date and the weather characteristics (temperature, humidity and wind) for a given city, including the weather for the next five days. The desired city can be searched by typing in the text input field and by clicking on the "Search" button. Then the city weather features for today and the next five days will be displayed. If the city has not been searched before the application will create a button with the name of the newly searched city, and store the city name in local storage. the city name buttons will make faster retrieval of the city weather instead of typing it on the search input field.
